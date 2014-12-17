@@ -9,15 +9,13 @@ start_time=`date +%s`
 
 # arguments
 ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-SRC_DIR="./src"
+SRC_DIR="$ROOT/src"
 S_JAR=$1
-INPUT_XML=$2
+INPUT_XML=`realpath $2`
 ES_HOST="localhost"
 ES_PORT="9200"
 ES_INDEX="redirects-sections-index"
 
-echo $INPUT_XML
-exit 0
 # dirs
 MAP_LINK_OUTPUT_DIR="$ROOT/output_p1"
 MAP_LINK_OUTPUT_FINAL_DIR="$ROOT/output_p2"
@@ -41,7 +39,7 @@ log "Purging tmp_output"
 rm -r $MAP_LINK_OUTPUT_DIR
 
 log "Running links hadoop job"
-hadoop jar $S_JAR -D $INPUT_SIZE_MIN -D $INPUT_SIZE_MAX -D $LINKS_REDUCERS -D $LINKS_MAPPERS -mapper "$LINKS_MAPPER" -reducer "$LINKS_REDUCER" -input "file:///$INPUT_XML" -output "file:///$MAP_LINK_OUTPUT_DIR"
+hadoop jar $S_JAR -D $INPUT_SIZE_MIN -D $INPUT_SIZE_MAX -D $LINKS_REDUCERS -D $LINKS_MAPPERS -mapper "$LINKS_MAPPER" -reducer "$LINKS_REDUCER" -input "file://$INPUT_XML" -output "file:///$MAP_LINK_OUTPUT_DIR"
 log "Hadoop links job done"
 
 log "Purging final output"
