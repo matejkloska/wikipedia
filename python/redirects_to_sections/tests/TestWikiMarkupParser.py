@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from kloska_wiki.parsers import *
+from src.parsers import *
 from .helpers import *
 from nose.tools import *
 
