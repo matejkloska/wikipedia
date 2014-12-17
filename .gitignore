@@ -1,9 +1,3 @@
-# python compiled files
-*.pyc
-
-# system specific files
-*.DS_Store
-
 # Hadoop result files
 *.crc
 part-*
